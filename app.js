@@ -1,6 +1,6 @@
 const STORAGE_KEY='friendsgiving-rsvps-v1';
 const $=id=>document.getElementById(id);
-const fields=['recordId','name','rsvp','partySize','arrivalDate','arrivalTime','departureDate','overnight','bedroom','dietary','bringing','kids','babyGear','notes'];
+const fields=['recordId','name','rsvp','partySize','arrivalDate','arrivalTime','departureDate','overnight','dietary','bringing','kids','babyGear','notes'];
 let records=JSON.parse(localStorage.getItem(STORAGE_KEY)||'[]');
 const save=()=>{localStorage.setItem(STORAGE_KEY,JSON.stringify(records));render();};
 const fmtDate=v=>{if(!v)return '—';const [y,m,d]=v.split('-');return new Date(Date.UTC(+y,+m-1,+d)).toLocaleDateString(undefined,{month:'short',day:'numeric'});};
@@ -8,7 +8,7 @@ const fmtTime=v=>{if(!v)return '';const [h,m]=v.split(':');const dt=new Date();d
 function render(){
  const q=$('search').value.trim().toLowerCase();
  const filtered=records.filter(r=>r.name.toLowerCase().includes(q));
- $('guestRows').innerHTML=filtered.map(r=>`<tr data-id="${r.id}"><td><strong>${escapeHtml(r.name)}</strong></td><td><span class="pill">${r.rsvp}</span></td><td>${r.partySize}</td><td>${fmtDate(r.arrivalDate)} ${fmtTime(r.arrivalTime)}</td><td>${r.overnight}</td><td>${escapeHtml(r.bedroom||'—')}</td><td>${escapeHtml(r.dietary||'—')}</td><td>${escapeHtml(r.bringing||'—')}</td></tr>`).join('');
+ $('guestRows').innerHTML=filtered.map(r=>`<tr data-id="${r.id}"><td><strong>${escapeHtml(r.name)}</strong></td><td><span class="pill">${r.rsvp}</span></td><td>${r.partySize}</td><td>${fmtDate(r.arrivalDate)} ${fmtTime(r.arrivalTime)}</td><td>${r.overnight}</td><td>${escapeHtml(r.dietary||'—')}</td><td>${escapeHtml(r.bringing||'—')}</td></tr>`).join('');
  $('emptyState').classList.toggle('hidden',filtered.length>0);
  document.querySelectorAll('#guestRows tr').forEach(tr=>tr.addEventListener('click',()=>openEdit(tr.dataset.id)));
  const yes=records.filter(r=>r.rsvp==='Yes');
@@ -18,8 +18,8 @@ function render(){
  $('dishCount').textContent=yes.filter(r=>r.bringing.trim()).length;
  const arrivals=[...yes].filter(r=>r.arrivalDate||r.arrivalTime).sort((a,b)=>(a.arrivalDate+a.arrivalTime).localeCompare(b.arrivalDate+b.arrivalTime));
  $('arrivalList').innerHTML=arrivals.length?arrivals.map(r=>`<div class="item"><strong>${escapeHtml(r.name)}</strong><span>${fmtDate(r.arrivalDate)} ${fmtTime(r.arrivalTime)}</span></div>`).join(''):'<p>No arrival times yet.</p>';
- const beds=yes.filter(r=>r.overnight==='Yes');
- $('bedroomList').innerHTML=beds.length?beds.map(r=>`<div class="item"><strong>${escapeHtml(r.name)}</strong><span>${escapeHtml(r.bedroom||'Sleeping spot not assigned')}</span></div>`).join(''):'<p>No overnight guests yet.</p>';
+ const overnight=yes.filter(r=>r.overnight==='Yes');
+ $('overnightList').innerHTML=overnight.length?overnight.map(r=>`<div class="item"><strong>${escapeHtml(r.name)}</strong><span>${r.partySize} in party${r.departureDate?' · Leaving '+fmtDate(r.departureDate):''}</span></div>`).join(''):'<p>No overnight guests yet.</p>';
  const food=yes.filter(r=>r.dietary.trim()||r.bringing.trim());
  $('foodList').innerHTML=food.length?food.map(r=>`<div class="item"><strong>${escapeHtml(r.name)}</strong><span>${r.dietary?('Dietary: '+escapeHtml(r.dietary)):'No dietary notes'}${r.bringing?('<br>Bringing: '+escapeHtml(r.bringing)):''}</span></div>`).join(''):'<p>No food notes yet.</p>';
 }
