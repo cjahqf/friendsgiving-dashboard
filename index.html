@@ -55,6 +55,7 @@
         <div id="foodList" class="stack"></div>
       </article>
     </section>
+    <section class="panel"><h2>Dinner theme favorites</h2><p>Based on everyone’s selections.</p><div id="themeResults" class="stack"></div></section>
   </main>
 
   <dialog id="rsvpDialog">
@@ -77,6 +78,21 @@
         <label class="wide">What are you bringing?<textarea id="bringing" rows="3" placeholder="Appetizer, dessert, drinks, side dish..."></textarea></label>
         <label>Kids coming?<select id="kids"><option>No</option><option>Yes</option></select></label>
         <label>Need a high chair / crib?<select id="babyGear"><option>No</option><option>Yes</option></select></label>
+        <fieldset class="wide" id="themeFieldset"><legend>Dinner theme preferences <span>(select all you like)</span></legend>
+          <div class="theme-options">
+            <label><input type="checkbox" name="dinnerTheme" value="Classic Friendsgiving"> Classic Friendsgiving</label>
+            <label><input type="checkbox" name="dinnerTheme" value="Italian Night"> Italian Night</label>
+            <label><input type="checkbox" name="dinnerTheme" value="Taco & Margarita Night"> Taco & Margarita Night</label>
+            <label><input type="checkbox" name="dinnerTheme" value="Chili & Football Night"> Chili & Football Night</label>
+            <label><input type="checkbox" name="dinnerTheme" value="BBQ Night"> BBQ Night</label>
+            <label><input type="checkbox" name="dinnerTheme" value="Pizza Night"> Pizza Night</label>
+            <label><input type="checkbox" name="dinnerTheme" value="Steakhouse Night"> Steakhouse Night</label>
+            <label><input type="checkbox" name="dinnerTheme" value="Breakfast for Dinner"> Breakfast for Dinner</label>
+            <label><input type="checkbox" name="dinnerTheme" value="Soup + Sandwich Night"> Soup + Sandwich Night</label>
+            <label><input type="checkbox" name="dinnerTheme" value="Everyone Brings a Specialty"> Everyone Brings a Specialty</label>
+          </div>
+        </fieldset>
+        <label class="wide">Other dinner theme suggestion<input id="themeSuggestion" maxlength="120" placeholder="Add your own idea..." /></label>
         <label class="wide">Notes<textarea id="notes" rows="3" placeholder="Anything else the hosts should know?"></textarea></label>
       </div>
       <div class="dialog-actions">
