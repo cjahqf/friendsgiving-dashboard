@@ -36,7 +36,7 @@
         <table>
           <thead>
             <tr>
-              <th>Name</th><th>RSVP</th><th>Guests</th><th>Arrival</th><th>Overnight</th><th>Dietary</th><th>Bringing</th>
+              <th>Name</th><th>RSVP</th><th>Guests</th><th>Arrival</th><th>Overnight nights</th><th>Dietary</th><th>Bringing</th>
             </tr>
           </thead>
           <tbody id="guestRows"></tbody>
@@ -76,7 +76,12 @@
         <label>Arrival date<input id="arrivalDate" type="date" /></label>
         <label>Arrival time<input id="arrivalTime" type="time" /></label>
         <label>Departure date<input id="departureDate" type="date" /></label>
-        <label>Staying overnight?<select id="overnight"><option>No</option><option>Yes</option></select></label>
+        <fieldset><legend>Staying overnight?</legend>
+          <div class="theme-options">
+            <label><input type="checkbox" name="overnightNight" value="Friday"> Friday</label>
+            <label><input type="checkbox" name="overnightNight" value="Saturday"> Saturday</label>
+          </div>
+        </fieldset>
         <label class="wide">Dietary restrictions / allergies<textarea id="dietary" rows="3" placeholder="None, vegetarian, gluten-free, nut allergy..."></textarea></label>
         <label class="wide">What are you bringing?<textarea id="bringing" rows="3" placeholder="Appetizer, dessert, drinks, side dish..."></textarea></label>
         <label>Kids coming?<select id="kids"><option>No</option><option>Yes</option></select></label>
