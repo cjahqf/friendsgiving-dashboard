@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Friendsgiving HQ</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="shell">
+    <header class="hero">
+      <div>
+        <p class="eyebrow">Friendsgiving HQ</p>
+        <h1>Plan the weekend without the group-chat chaos.</h1>
+        <p class="sub">RSVP, arrival times, dietary needs, beds, dishes, and notes — all in one place.</p>
+      </div>
+      <button id="addGuestBtn" class="primary">Add / update my RSVP</button>
+    </header>
+
+    <section class="stats" aria-label="Event summary">
+      <article><span id="guestCount">0</span><small>Guests attending</small></article>
+      <article><span id="overnightCount">0</span><small>Staying overnight</small></article>
+      <article><span id="dietCount">0</span><small>Dietary needs</small></article>
+      <article><span id="dishCount">0</span><small>Dishes claimed</small></article>
+    </section>
+
+    <section class="panel">
+      <div class="panel-head">
+        <div>
+          <h2>Guest list</h2>
+          <p>Tap your row to update your info.</p>
+        </div>
+        <input id="search" type="search" placeholder="Search names..." aria-label="Search guests" />
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th><th>RSVP</th><th>Guests</th><th>Arrival</th><th>Overnight</th><th>Bedroom</th><th>Dietary</th><th>Bringing</th>
+            </tr>
+          </thead>
+          <tbody id="guestRows"></tbody>
+        </table>
+      </div>
+      <p id="emptyState" class="empty">No RSVPs yet. Be the first to add yours.</p>
+    </section>
+
+    <section class="grid">
+      <article class="panel">
+        <h2>Arrival timeline</h2>
+        <div id="arrivalList" class="stack"></div>
+      </article>
+      <article class="panel">
+        <h2>Bedroom board</h2>
+        <div id="bedroomList" class="stack"></div>
+      </article>
+      <article class="panel">
+        <h2>Food & dietary notes</h2>
+        <div id="foodList" class="stack"></div>
+      </article>
+    </section>
+  </main>
+
+  <dialog id="rsvpDialog">
+    <form id="rsvpForm" method="dialog">
+      <div class="dialog-head">
+        <div><p class="eyebrow">Your details</p><h2 id="dialogTitle">Add RSVP</h2></div>
+        <button type="button" class="icon" id="closeDialog" aria-label="Close">×</button>
+      </div>
+      <input type="hidden" id="recordId" />
+      <div class="form-grid">
+        <label>Household / name<input id="name" required maxlength="80" /></label>
+        <label>RSVP<select id="rsvp"><option>Yes</option><option>Maybe</option><option>No</option></select></label>
+        <label>Total people in your party<input id="partySize" type="number" min="1" max="20" value="1" required /></label>
+        <label>Arrival date<input id="arrivalDate" type="date" /></label>
+        <label>Arrival time<input id="arrivalTime" type="time" /></label>
+        <label>Departure date<input id="departureDate" type="date" /></label>
+        <label>Staying overnight?<select id="overnight"><option>No</option><option>Yes</option></select></label>
+        <label>Bedroom / sleeping spot<input id="bedroom" maxlength="80" placeholder="Guest room, air mattress, undecided..." /></label>
+        <label class="wide">Dietary restrictions / allergies<textarea id="dietary" rows="3" placeholder="None, vegetarian, gluten-free, nut allergy..."></textarea></label>
+        <label class="wide">What are you bringing?<textarea id="bringing" rows="3" placeholder="Appetizer, dessert, drinks, side dish..."></textarea></label>
+        <label>Kids coming?<select id="kids"><option>No</option><option>Yes</option></select></label>
+        <label>Need a high chair / crib?<select id="babyGear"><option>No</option><option>Yes</option></select></label>
+        <label class="wide">Notes<textarea id="notes" rows="3" placeholder="Anything else the hosts should know?"></textarea></label>
+      </div>
+      <div class="dialog-actions">
+        <button type="button" class="danger hidden" id="deleteBtn">Delete my entry</button>
+        <div class="spacer"></div>
+        <button type="button" class="secondary" id="cancelBtn">Cancel</button>
+        <button class="primary" type="submit">Save RSVP</button>
+      </div>
+      <p class="privacy">This version saves entries in this browser. Once the shared backend is connected, everyone will see the same live list.</p>
+    </form>
+  </dialog>
+
+  <script src="app.js"></script>
+</body>
+</html>
